@@ -8,6 +8,7 @@ authors = ["Giang Ta <thoanggiang98@gmail.com>"]
 python = "^3.8"
 discord = "^1.0.1"
 python-dotenv = "^0.15.0"
+riotwatcher = "^3.1.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

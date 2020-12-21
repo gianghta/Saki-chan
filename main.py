@@ -6,9 +6,11 @@ import os
 from dotenv import load_dotenv
 from discord.ext import commands
 from http_request import fetch
+from league_watcher import LeagueWatcher
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
+LEAGUE_API_KEY = os.getenv('LEAGUE_API_KEY')
 
 bot = commands.Bot(command_prefix="saki ")
 
@@ -60,6 +62,15 @@ async def get_xkcd_comic(ctx):
         await ctx.channel.send(f'{image}')
     except Exception as e:
         print(f'Error: {e}')
-
+    
+@bot.command(name="find-lol")
+async def get_lol_player_stat(ctx, player, region):
+    player = player.replace("-", " ")
+    watcher = LeagueWatcher(api_key=LEAGUE_API_KEY, region=region)
+    new_player = watcher.find_player_stats(player)
+    if not isinstance(new_player, str):
+        await ctx.channel.send(f"```Player: {new_player['summonerName']}\nTier: {new_player['tier']}\nRank: {new_player['rank']}\nWins: {new_player['wins']}\nLosses: {new_player['losses']}```")
+    else:
+        await ctx.channel.send(f'No player name {player} found')
 
 bot.run(TOKEN)
