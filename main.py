@@ -73,8 +73,8 @@ async def get_xkcd_comic(ctx):
     
 @bot.command(
     name="find-lol",
-    help='Get a LoL player profile/stats, use "-" for spacing words. Input format: saki find-lol \{player name\} \{region\}',
-    brief='Input format: saki find-lol \{player name\} \{region\}'
+    help='Get a LoL player profile/stats, use "-" for spacing words. Input format: saki find-lol {player name} {region}',
+    brief='Input format: saki find-lol {player name} {region}'
 )
 async def get_lol_player_stat(ctx, player, region):
     player = player.replace("-", " ")
