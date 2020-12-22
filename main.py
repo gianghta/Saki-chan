@@ -22,7 +22,11 @@ async def on_ready():
     print(bot.user.id)
     print('------')
 
-@bot.command(name="guess")
+@bot.command(
+    name="guess",
+    help="Playing guessing game with Saki by giving her a number from 1 to 10",
+    brief="Guessing game with number 1 to 10"
+)
 async def get_guess_num(ctx):
     await ctx.channel.send('Guess a number between 1 and 10.')
 
@@ -41,7 +45,11 @@ async def get_guess_num(ctx):
     else:
         await ctx.channel.send('Oops. It is actually {}.'.format(answer))
 
-@bot.command(name="grab-xkcd")
+@bot.command(
+    name="grab-xkcd",
+    help="Grab a random XKCD comic from the website",
+    brief="Get XKCD comic"
+)
 async def get_xkcd_comic(ctx):
     total_comics, rand_num = 0, 0
 
@@ -63,7 +71,11 @@ async def get_xkcd_comic(ctx):
     except Exception as e:
         print(f'Error: {e}')
     
-@bot.command(name="find-lol")
+@bot.command(
+    name="find-lol",
+    help='Get a LoL player profile/stats, use "-" for spacing words. Input format: saki find-lol \{player name\} \{region\}',
+    brief='Input format: saki find-lol \{player name\} \{region\}'
+)
 async def get_lol_player_stat(ctx, player, region):
     player = player.replace("-", " ")
     watcher = LeagueWatcher(api_key=LEAGUE_API_KEY, region=region)
