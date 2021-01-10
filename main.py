@@ -2,6 +2,7 @@ import discord
 import os
 import platform
 import traceback
+import aiohttp
 
 from dotenv import load_dotenv
 from discord.ext import commands
@@ -13,7 +14,8 @@ DESCR = 'General purpose bot for private server'
 # File names of extensions we are loading on startup
 startup_extensions = ['cogs.general',
                       'cogs.lol',
-                      'cogs.xkcd']
+                      'cogs.xkcd',
+                      'cogs.latex']
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -26,8 +28,11 @@ class SakiBot(commands.Bot):
             description=DESCR,
             case_insensitive=True,
         )
+
+        self.session = aiohttp.ClientSession()
     
     async def close(self):
+        await self.session.close()
         await super().close()
 
 bot = SakiBot()
