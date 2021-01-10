@@ -32,11 +32,15 @@ class TexRenderError(commands.CommandError):
         self.logs = logs
 
 
-class LatexCog(commands.Cog, name='Misc.'):
+class LatexCog(commands.Cog, name='Math'):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(aliases=['tex'])
+    @commands.command(
+        aliases=['tex'],
+        help="Generate Latex image from Latex code: saki tex|latex <input code>",
+        brief="Generate Latex image from chat input"
+    )
     async def latex(self, ctx, *, latex):
         if latex.startswith('```') and latex.endswith('```'):
             latex = '\n'.join(latex.split('\n')[1:-1])

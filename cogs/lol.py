@@ -17,7 +17,7 @@ class LeagueStats(commands.Cog, name="League Of Legends"):
     @commands.command(
     name="find-lol",
     help='Get a LoL player profile/stats, use "-" for spacing words. Input format: saki find-lol {player name} {region}',
-    brief='Input format: saki find-lol {player name} {region}'
+    brief='Find LoL player account info'
     )
     async def get_lol_player_stat(self, ctx, player, region):
         player = player.replace("-", " ")
