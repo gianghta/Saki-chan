@@ -43,7 +43,7 @@ class LatexCog(commands.Cog, name='Math'):
     )
     async def latex(self, ctx, *, latex):
         if latex.startswith('```') and latex.endswith('```'):
-            latex = '\n'.join(latex.split('\n')[1:-1])
+            latex = '\n'.join(latex.replace('```', '').split('\n'))
         to_render = TEMPLATE.replace('USERINPUTHERE', latex)
         await self.render(ctx, to_render)
 
